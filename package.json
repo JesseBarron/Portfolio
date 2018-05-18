@@ -11,8 +11,8 @@
     "build-watch": "webpack -w --mode development",
     "start": "node ./server/index.js",
     "start-dev": "NODE_ENV='development' yarn build-watch & nodemon ./server/index.js",
-    "test": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha ./server/**/*.test.js ./server/**/**/*.test.js",
-    "test-client": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha --require ./client/testSetup.js --compilers babel-core/register ./client/**/*.test.js ./client/**/**/*.test.js"
+    "test": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/boilerplate-TEST' mocha ./server/**/*.test.js ./server/**/**/*.test.js",
+    "test-client": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/boilerplate-TEST' mocha --require ./client/testSetup.js --compilers babel-core/register ./client/**/*.test.js ./client/**/**/*.test.js"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.5",

@@ -53,6 +53,7 @@ userSchema.methods.saltPassword = async function() {
     }
 }
 
+/* Checks if the inputed password matches */
 userSchema.methods.correctPassword = async function(userPswd) {
     try {
         return await argon.verify(this.password, userPswd)

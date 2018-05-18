@@ -3,7 +3,7 @@ const passport = require('passport')
 const app = require('../index')
 module.exports = router
 
-
+//If authenticated, returns all the user details, otherwise just the name and id
 router.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
     try {
         if(req.user.admin) {

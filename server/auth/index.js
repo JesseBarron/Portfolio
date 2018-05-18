@@ -15,7 +15,6 @@ router.post('/login', async (req, res, next) => {
             success: true
         })
     } catch(e) {
-        // console.log(e)
         res.send({
             code: 500,
             message: "Wrong Email or password please try again",
@@ -24,6 +23,7 @@ router.post('/login', async (req, res, next) => {
     }
 })
 
+//Creates a new user account
 router.post('/signup', async (req, res, next) => {
     try {
         const user = await app.service('user').create(req.body)
