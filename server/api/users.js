@@ -34,7 +34,6 @@ router.post('/', async (req, res, next) => {
 
 router.delete('/', passport.authenticate('jwt',{session: false}), async (req, res, next) => {
     try {
-        // Add the option for users to delete their own accounts if they wish.
         if(req.user.admin) {
             const where = req.body
             res.send(await app.service('user').remove(null, where))
