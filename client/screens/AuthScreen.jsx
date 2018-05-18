@@ -17,6 +17,7 @@ class AuthScreen extends Component {
             password: '',
             confirmPW: '',
             submitDisabled: true,
+            buttonClass: 'disabled',
             error: ''
         }
     }
@@ -33,11 +34,11 @@ class AuthScreen extends Component {
             }
         })
     }
-    
+
     validateLogin = () => {
         const { email, password } = this.state
         if(email && password) {
-            this.setState({ submitDisabled: false })
+            this.setState({ submitDisabled: false, buttonClass: 'enabled' })
             return true
         } else {
             this.setState({ submitDisabled: true })
@@ -48,7 +49,7 @@ class AuthScreen extends Component {
     validateSignup = () => {
         const { email, name, password, confirmPW } = this.state
         if(email && name && password && confirmPW && this.checkPW()) {
-            this.setState({ submitDisabled: false })
+            this.setState({ submitDisabled: false, buttonClass: 'enabled' })
             return true
         } else {
             this.setState({ submitDisabled: true})
@@ -75,55 +76,61 @@ class AuthScreen extends Component {
     }
 
     render() {
-        const { email, name, password, submitDisabled, confirmPW, error } = this.state
+        const { email, name, password, submitDisabled, confirmPW, error, buttonClass } = this.state
         const { type } = this.props
         return (
-            <div className="authFormContainer">
-                <div className="formHeader">
-                    <h1>{type}</h1>
-                    <ErrorDisplay error={error}/>
-                </div>
-                <form onSubmit={this.handleSubmit}>
-                    {
-                        type == 'signup' &&
-                        <div>
-                            <h5>Name</h5>
+            <div className="authFormScreenContainer">
+                <div className="authFormContainer">
+                    <div className="formHeader">
+                        <h1>{type.toUpperCase()}</h1>
+                        <ErrorDisplay error={error}/>
+                    </div>
+                    <form className="contact-form" onSubmit={this.handleSubmit}>
+                        {
+                            type == 'signup' &&
+                            <div className="input-container">
+                                <label>Name</label>
+                                <input
+                                    type="text"
+                                    value={name}
+                                    onChange={(e) => this.handleInputChange('name', e)}
+                                    className="input name"
+                                />
+                            </div>
+                        }
+                        <div className="input-container">
+                            <label>Email</label>
                             <input
-                                type="text"
-                                value={name}
-                                onChange={(e) => this.handleInputChange('name', e)}
+                                type="email"
+                                value={email}
+                                onChange={(e) => this.handleInputChange('email', e)}
+                                className="input email"
                             />
                         </div>
-                    }
-                    <div>
-                        <h5>email</h5>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => this.handleInputChange('email', e)}
-                        />
-                    </div>
-                    <div>
-                        <h5>password</h5>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => this.handleInputChange('password', e)}
-                        />
-                    </div>
-                    {
-                        type == 'signup' &&
-                        <div>
-                            <h5>Confirm password</h5>
+                        <div className="input-container">
+                            <label>Password</label>
                             <input
                                 type="password"
-                                value={confirmPW}
-                                onChange={(e) => this.handleInputChange('confirmPW', e)}
+                                value={password}
+                                onChange={(e) => this.handleInputChange('password', e)}
+                                className="input password"
                             />
                         </div>
-                    }
-                    <button type="submit" disabled={submitDisabled}>{type}</button>
-                </form>
+                        {
+                            type == 'signup' &&
+                            <div className="input-container">
+                                <label>Confirm password</label>
+                                <input
+                                    type="password"
+                                    value={confirmPW}
+                                    onChange={(e) => this.handleInputChange('confirmPW', e)}
+                                    className="input confirmPW"
+                                />
+                            </div>
+                        }
+                        <button className={`submit-bttn ${buttonClass}`} type="submit" disabled={submitDisabled}>{type}</button>
+                    </form>
+                </div>
             </div>
         )
     }

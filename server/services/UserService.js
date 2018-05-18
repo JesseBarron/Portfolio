@@ -2,9 +2,7 @@
 const { User } = require('../db')
 
 class UserService {
-    constructor() {
-      
-    }
+    constructor() { }
 
     async find(params) {
         try {
@@ -20,16 +18,19 @@ class UserService {
 
     async create(data, params) {
         try {
-            const newUser = new User(data)
-            const createdUser = await newUser.save()
-            return createdUser
+            if(data.name && data.password && data.email && !data.admin) {
+                const newUser = new User(data)
+                const createdUser = await newUser.save()
+                return createdUser
+            }
+            throw new Error('You must fill in all fields in order to create an account')
         } catch(e) {
-            throw new Error("Email is Already Being used by a User")
+            throw e.message || new Error("Email is Already Being used by a User")
         }
     }
 
     async remove(id, params) {
-        return await User.remove(params)
+        return await User.remove({ id, params })
     }
 
     async login(email, password) {
@@ -38,9 +39,10 @@ class UserService {
             const user = await User.findOne({email: regexEmail})
             if(user == null) {
                 throw new Error('Incorrect password or username')
-            } else {
-                return {id:user.id, name:user.name} 
+            } else if(await user.correctPassword(password)) {
+                return {name: user.name, id: user.id}
             }
+            throw new Error('Incorrect password or username')            
         } catch (e) {
             throw e
         }

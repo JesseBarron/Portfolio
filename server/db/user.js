@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    created_at: {
+        type: Date,
+        default: Date.now()
+    },
     google_id: String,
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
     posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]

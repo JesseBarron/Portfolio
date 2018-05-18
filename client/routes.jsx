@@ -10,6 +10,7 @@ import {
     Main,
     Login,
     Signup,
+    NotFound,
     HomeScreen,
     BlogScreen
 } from './screens'
@@ -33,8 +34,10 @@ class Routes extends Component {
                             <Switch>
                                 <Route path='/signup' component={Signup} />
                                 <Route path='/login' component={Login} />
+                                <Route component={NotFound} />
                             </Switch>
                         }
+                        <Route component={NotFound} />
                     </Switch>
                  </Main>
             </Router>

@@ -6,10 +6,12 @@
   "author": "Jesse Barron",
   "license": "MIT",
   "scripts": {
+    "seed": "node ./server/scripts/seed.js",
     "build": "webpack",
     "build-watch": "webpack -w --mode development",
     "start": "node ./server/index.js",
-    "start-dev": "NODE_ENV='development' yarn build-watch & nodemon ./server/index.js"
+    "start-dev": "NODE_ENV='development' yarn build-watch & nodemon ./server/index.js",
+    "test": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha ./server/**/*.test.js ./server/**/**/*.test.js"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.5",
@@ -37,7 +39,8 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "socket.io-client": "^2.1.0"
+    "socket.io-client": "^2.1.0",
+    "supertest": "^3.1.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
@@ -45,9 +48,13 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.1.2",
     "css-loader": "^0.28.11",
+    "faker": "^4.1.0",
+    "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "sinon": "^5.0.7",
     "style-loader": "^0.21.0",
     "webpack": "^4.7.0",
     "webpack-cli": "^2.1.3"

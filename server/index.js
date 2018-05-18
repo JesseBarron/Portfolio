@@ -1,5 +1,5 @@
 require('dotenv').config()
-require('./db')
+const { db } = require('./db')
 const feathers = require('@feathersjs/feathers')
 const express = require('@feathersjs/express')
 const socketio = require('@feathersjs/socketio')

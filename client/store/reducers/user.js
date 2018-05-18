@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.headers.common['Autorization'] = 'Bearer ' + localStorage.getItem('JB_JWT')
+axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('JB_JWT')
 
 import jwtDecode from 'jwt-decode'
 

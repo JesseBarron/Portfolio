@@ -1,3 +1,100 @@
+.authFormScreenContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background: #f3f3f3;
+    text-align: center;
+}
+
 .authFormContainer {
-    background: #f2f2f2
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: auto;
+    background: #FFFFFF;
+    border: solid 5px #575757;
+}
+
+.formHeader {
+    background: #1ABC9C;
+    color: #f3f3f3;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 10px 0 10px;
+    }
+    .input {
+        flex: 1;
+        width: 90%;
+        height: 30px;
+        font-size: 20px;
+        padding-left: 35px;
+        background: #F7F3EB;
+        border: solid 3px #979797;
+        transition: 0.3s;
+    }
+    .input.name {
+        background-image: url('/assets/loginName.png');
+        background-size: 20px;
+        background-position: 1%;
+        background-repeat: no-repeat;
+    }
+    .input.email {
+        background-image: url('/assets/emailIcon.png');
+        background-size: 20px;
+        background-position: 1%;
+        background-repeat: no-repeat;
+    }
+    .input.confirmPW {
+        background-image: url('/assets/lockIcon.png');
+        background-size: 20px;
+        background-position: 1%;
+        background-repeat: no-repeat;
+    }
+    .input.password {
+        background-image: url('/assets/passwordIcon.png');
+        background-size: 20px;
+        background-position: 1%;
+        background-repeat: no-repeat;
+    }
+    .input:focus {
+        border: solid 3px #272727;
+    }
+
+    .submit-bttn {
+        width: auto;
+        align-self: center;
+        font-size: 30px;
+        color: #F7F3EB;
+        border: none;
+        padding: 5px;
+    }
+    .disabled { 
+        background: rgb(15, 110, 91);
+        cursor: not-allowed;
+    }
+    .enabled {
+        background: rgb(23, 156, 130);
+        cursor: pointer;
+    }
+}
+
+@media  (max-width: 850px) {
+    .authFormScreenContainer {
+        height: auto;
+    }
+    .authFormContainer {
+        width: 100%; 
+    }
 }

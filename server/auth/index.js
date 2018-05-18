@@ -15,7 +15,7 @@ router.post('/login', async (req, res, next) => {
             success: true
         })
     } catch(e) {
-        console.log(e)
+        // console.log(e)
         res.send({
             code: 500,
             message: "Wrong Email or password please try again",
@@ -37,7 +37,6 @@ router.post('/signup', async (req, res, next) => {
             token: jwt.sign({name, id}, process.env.JWT_SECRET)
         })
     } catch(e) {
-        console.log(e)
         res.send({
             code: 500,
             message: 'User is already using this email',
