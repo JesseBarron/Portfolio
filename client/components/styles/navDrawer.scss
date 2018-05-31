@@ -1,0 +1,60 @@
+
+.navDrawerContainer {
+  position: fixed;
+  left: 100vw;
+  width: 100vw;
+  opacity: 0;  
+  transition: .3s ease-in-out;
+  z-index: 20;
+
+  .backgroundDiv {
+    background: rgba(0, 0, 0, 0.3);
+    height: 90vh;
+  }
+  .navDrawer {
+    display: flex;
+    flex-direction: column;
+    background: rgba(#89f0ed, 0.9);
+  }
+  .navDrawerHead {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    padding: 8px;
+  
+    h2 {
+      flex: 1;
+      text-align: center;
+    }
+    #arrow {
+      position: absolute;
+      cursor: pointer;
+    }
+  }
+  .linkList {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+  }
+  .listItem {
+    flex: 1;
+    padding: 10px;
+    width: 80%;
+    text-align: center;
+    border-top: 1px solid #333;
+  }
+  #navLink {
+    width: 100%;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 25px;
+    color: #333;
+  }
+  
+}
+.show {
+  left: 0;
+  opacity: 1;
+}

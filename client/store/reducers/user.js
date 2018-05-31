@@ -53,13 +53,19 @@ export const authUser = (type, data, history) =>
         }
     }
 
-export const fetchMe = () => 
+export const fetchMe = () =>
     dispatch => {
-    const user =  jwtDecode(localStorage.getItem('JB_JWT'))
-    dispatch(getUser(user))
+      try {
+        const user =  jwtDecode(localStorage.getItem('JB_JWT'))
+        console.log(user)
+        dispatch(getUser(user))
+      } catch(e) {
+        console.log(e)
+        localStorage.removeItem('JB_JWT')
+      }
 }
 
-export const logout = () => 
+export const logout = () =>
     dispatch => {
         localStorage.removeItem('JB_JWT')
         dispatch(removeUser())

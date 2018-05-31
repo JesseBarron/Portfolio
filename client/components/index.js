@@ -1,2 +1,6 @@
 export { default as NavBar } from './navbar.jsx'
 export { default as ErrorDisplay } from './errorDisplay.jsx'
+export { default as navDrawer } from './navDrawer.jsx'
+export { default as Footer } from './footer.jsx'
+export { default as SocialBttns } from './socialbttns.jsx'
+export { default as Bio } from './bio.jsx'

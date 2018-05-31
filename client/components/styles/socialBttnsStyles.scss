@@ -1,0 +1,17 @@
+.socialBttn_container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    .socialBttn {
+        margin: 8px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .socialBttn   a {
+        text-decoration: none;
+        color: white;
+        cursor: pointer;
+    }
+}

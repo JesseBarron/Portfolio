@@ -1,6 +1,6 @@
 const faker = require('faker')
 const { User } = require('../db')
-const db = require('../db/db')
+const { db } = require('../db/db')
 
 const generateUsers = async () => {
     const fakeUsers = [{
@@ -17,15 +17,25 @@ const generateUsers = async () => {
         }
         fakeUsers.push(user)
     }
-    await User.create(fakeUsers)
-    return true
+    try {
+      await User.create(fakeUsers)
+      return true
+    } catch(e) {
+      console.log(e)
+    }
 }
 
 const seed = async () => {
-    await User.remove()
-    generateUsers()
-    return
+  try {
+    await db.dropDatabase()
+    await generateUsers()
+    return "DONE"
+  } catch (e) {
+    console.log(e);
+  }
 }
 
 seed()
-process.exit(0)
+  .then(() => {
+    process.exit(0)
+  })

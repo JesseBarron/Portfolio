@@ -4,7 +4,6 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
-    background: #f3f3f3;
     text-align: center;
 }
 
@@ -13,7 +12,7 @@
     flex-direction: column;
     width: 40%;
     height: auto;
-    background: #FFFFFF;
+    background: #FFFFFF93;
     border: solid 5px #575757;
 }
 
@@ -40,7 +39,7 @@
         height: 30px;
         font-size: 20px;
         padding-left: 35px;
-        background: #F7F3EB;
+        background: #F7F3EB65;
         border: solid 3px #979797;
         transition: 0.3s;
     }
@@ -80,7 +79,7 @@
         border: none;
         padding: 5px;
     }
-    .disabled { 
+    .disabled {
         background: rgb(15, 110, 91);
         cursor: not-allowed;
     }
@@ -91,10 +90,7 @@
 }
 
 @media  (max-width: 850px) {
-    .authFormScreenContainer {
-        height: auto;
-    }
     .authFormContainer {
-        width: 100%; 
+        width: 100%;
     }
 }
