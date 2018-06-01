@@ -9,7 +9,10 @@ const morgan = require('morgan')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt
-const { UserService } = require('./services')
+const { 
+    UserService,
+    ProjectService
+} = require('./services')
 const PORT = process.env.PORT || 8080;
 const app = express(feathers())
 module.exports = app
@@ -73,6 +76,7 @@ app.use((err, req, res, next) => {
 
 /* Services Registry */
 app.use('user', new UserService)
+app.use('project', new ProjectService)
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)

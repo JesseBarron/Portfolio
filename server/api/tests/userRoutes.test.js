@@ -23,6 +23,7 @@ xdescribe('users API endpoints', () => {
     }
     beforeEach(async () => {
         try {
+            await db.dropDatabase()
             u1 = await User.create(user)
             u2 = await User.create(user2)
 

@@ -1,5 +1,5 @@
 const faker = require('faker')
-const { User } = require('../db')
+const { User, Project } = require('../db')
 const { db } = require('../db/db')
 
 const generateUsers = async () => {
@@ -7,7 +7,8 @@ const generateUsers = async () => {
         name: 'Jay',
         email: 'j@j.com',
         password: 123,
-        admin: true
+        admin: true,
+        god: true
     }]
     for(let i = 0; i < 20; i++) {
         let user = {
@@ -25,10 +26,37 @@ const generateUsers = async () => {
     }
 }
 
+const generateProjects = async () => {
+  const fakeProjects = []
+  for(let i = 0; i < 20; i++) {
+    let project = {
+        title: faker.internet.domainName(),
+        description: faker.lorem.paragraph(),
+        dateCreated: faker.date.past(),
+        technologies: [
+          faker.company.companyName(),
+          faker.company.companyName(),
+        ],
+        URL: faker.internet.domainName(),
+        githubRepo: faker.internet.domainName(),
+        screenshot: faker.image.imageUrl(),
+        featured: (i * (8 * i) % 6) ? false : true,
+    }
+    fakeProjects.push(project)
+  }
+  try {
+    await Project.create(fakeProjects)
+    return true
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 const seed = async () => {
   try {
     await db.dropDatabase()
     await generateUsers()
+    await generateProjects()
     return "DONE"
   } catch (e) {
     console.log(e);

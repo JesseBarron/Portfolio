@@ -8,3 +8,4 @@ const app = feathers()
 app.configure(socketio(socket))
 
 export const userService = app.service('user')
+export const projectService = app.service('project')

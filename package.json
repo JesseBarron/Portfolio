@@ -12,7 +12,7 @@
     "start": "node ./server/index.js",
     "start-dev": "NODE_ENV='development' yarn build-watch & nodemon ./server/index.js",
     "test": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha ./server/**/*.test.js ./server/**/**/*.test.js",
-    "test-client": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha --require ./client/testSetup.js --compilers babel-core/register ./client/**/*.test.js ./client/**/**/*.test.js"
+    "test-client": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' yarn seed && yarn start & mocha --require babel-polyfill ./client/testSetup.js --compilers babel-core/register ./client/**/*.test.js ./client/**/**/*.test.js"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.5",
@@ -55,9 +55,11 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "faker": "^4.1.0",
+    "fetch-mock": "^6.4.3",
     "jsdom": "^11.10.0",
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
+    "redux-mock-store": "^1.5.1",
     "sass-loader": "^7.0.1",
     "sinon": "^5.0.7",
     "style-loader": "^0.21.0",

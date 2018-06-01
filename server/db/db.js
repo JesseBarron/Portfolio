@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 //TODO: change this to be compatible with heroku
+console.log(process.env.DB_URL)
 const url = process.env.DB_URL || 'mongodb://localhost:27017/portfolio'
 mongoose.connect(url)
 const db = mongoose.connection

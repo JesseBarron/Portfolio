@@ -16,6 +16,10 @@ const userSchema = mongoose.Schema({
         type: Boolean,
         default: false
     },
+    god: {
+        type: Boolean,
+        default: false
+    },
     created_at: {
         type: Date,
         default: Date.now()

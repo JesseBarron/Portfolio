@@ -6,7 +6,7 @@ class UserService {
 
     async find(params) {
         try {
-            return await User.find(params)
+            return await User.find(params.query)
         } catch(e) {
             console.log(e)
         }

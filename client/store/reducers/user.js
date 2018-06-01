@@ -2,9 +2,7 @@ import axios from 'axios'
 axios.defaults.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('JB_JWT')
 
 import jwtDecode from 'jwt-decode'
-
-
-import { userService, authService } from '../../service'
+import { userService } from '../../service'
 
 
 const GET_USER = 'GET_USER'
