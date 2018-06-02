@@ -10,3 +10,4 @@ const store = createStore(rootReducer, applyMiddleware(...middleware))
 
 export default store
 export * from './reducers/user'
+export * from './reducers/project'

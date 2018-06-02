@@ -2,6 +2,27 @@ const faker = require('faker')
 const { User, Project } = require('../db')
 const { db } = require('../db/db')
 
+
+const tech = [
+  'ReactNative',
+  'PostgreSQL',
+  'JavaScript',
+  'MongoDB',
+  'Node.js',
+  'Webpack',
+  'React',
+  'Redux',
+]
+
+const getRandomTech = (n) => {
+  let techArr = []
+  for(let i = 0; i < n; i++) {
+    let ranNum = Math.floor(Math.random() * ((tech.length - 1) - 0) + 1)
+    techArr.push(tech[ranNum])
+  }
+  return techArr
+}
+
 const generateUsers = async () => {
     const fakeUsers = [{
         name: 'Jay',
@@ -33,10 +54,7 @@ const generateProjects = async () => {
         title: faker.internet.domainName(),
         description: faker.lorem.paragraph(),
         dateCreated: faker.date.past(),
-        technologies: [
-          faker.company.companyName(),
-          faker.company.companyName(),
-        ],
+        technologies: getRandomTech(4),
         URL: faker.internet.domainName(),
         githubRepo: faker.internet.domainName(),
         screenshot: faker.image.imageUrl(),

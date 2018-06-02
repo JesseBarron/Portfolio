@@ -56,6 +56,15 @@
   .logo {
     height: 100px;
   }
+
+  #menuBttn {
+    position: fixed;
+    z-index: 20;
+    top: 33px;
+    right: 8px;
+    background: white;
+    border-radius: 50%;
+  }
   #openDrawer {
     display: none;
     cursor: pointer;

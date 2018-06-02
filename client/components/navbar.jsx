@@ -51,14 +51,14 @@ const NavBar = (props) => {
                 signup
               </NavLink>
             </div>
-            <div id="menuBttn">
-              <Menu size={50} onClick={toggleDrawer} id="openDrawer"/>
+            <div id="menuBttn" onClick={toggleDrawer}>
+              <Menu size={50} id="openDrawer"/>
             </div>
           </div>
         : <div className="authButtonContainer">
             <button onClick={props.logout}>LogOut</button>
             <div id="menuBttn">
-              <Menu size={50} onClick={toggleDrawer} id="openDrawer"/>
+              <Menu size={40} onClick={toggleDrawer} id="openDrawer"/>
             </div>
           </div>
     }

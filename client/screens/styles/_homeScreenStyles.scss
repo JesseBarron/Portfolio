@@ -1,9 +1,12 @@
 .home-screen-container {
     display: grid;
-    grid-template-rows: 1fr auto 1fr;
+    grid-template-rows: auto auto 1fr;
     .home-bio {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .home-projects {
+        overflow: hidden;
     }
 }
