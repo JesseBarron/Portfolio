@@ -8,11 +8,11 @@ import NavDrawer from './navDrawer.jsx'
 import {logout} from '../store'
 
 const NavBar = (props) => {
-  const {isLoggedIn, toggleDrawer} = props
+  const {isLoggedIn, toggleDrawer, menuAnimation} = props
   return (<div className="container">
     <div className="navbarContainer">
       <div className="navItem">
-        <NavLink className="navLink home" to='/'>Home</NavLink>
+        <NavLink className="navLink home" to='/projects'>Projects</NavLink>
         <hr/>
       </div>
       <div className="navItem">
@@ -51,13 +51,13 @@ const NavBar = (props) => {
                 signup
               </NavLink>
             </div>
-            <div id="menuBttn" onClick={toggleDrawer}>
+            <div className={`menuBttn ${menuAnimation}`} onClick={toggleDrawer}>
               <Menu size={50} id="openDrawer"/>
             </div>
           </div>
         : <div className="authButtonContainer">
             <button onClick={props.logout}>LogOut</button>
-            <div id="menuBttn">
+            <div  className={`menuBttn ${menuAnimation}`}>
               <Menu size={40} onClick={toggleDrawer} id="openDrawer"/>
             </div>
           </div>

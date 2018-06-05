@@ -4,8 +4,9 @@
   grid-template-columns: 25% auto auto;
   width: 100%;
   margin: 0 auto;
-  background: #2a2a2a39;
-  border-bottom: 1px solid black;
+  box-shadow: -1px -1px 23px black;
+  // background: #2a2a2a39;
+  // border-bottom: 1px solid black;
 
   .navbarContainer {
     grid-column: 2;
@@ -13,8 +14,9 @@
     max-width: 100%;
     display: flex;
     align-items: flex-end;
-    justify-content: space-between;
+    justify-content: center;
   }
+
   .navItem {
     flex: 1;
     display: flex;
@@ -24,16 +26,18 @@
     max-width: 120%;
     margin: 12px;
   }
+
   .navLink {
     text-decoration: none;
     font-size: 25px;
     margin: 0;
     color: #333;
   }
+
   .navItem:hover  hr {
     width: 70%;
   }
-  
+
   hr {
     height: 0.2rem;
     width: 0%;
@@ -52,18 +56,21 @@
     align-items: center;
     width: 100%;
   }
-  
+
   .logo {
     height: 100px;
+    // transform: scale(1.2)
   }
 
-  #menuBttn {
+  .menuBttn {
     position: fixed;
     z-index: 20;
-    top: 33px;
-    right: 8px;
-    background: white;
+    left: 20;
+    top: 20;
     border-radius: 50%;
+    background: #aaa2a387;
+    background: linear-gradient(-100deg, #ff0ada 0%, #30fcff 82%, #30fcff 100%);
+    transition: all 2s linear;
   }
   #openDrawer {
     display: none;

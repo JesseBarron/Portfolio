@@ -29,7 +29,7 @@ const getTech = (techArr, w, h, id) => {
         if(techList[tech]) {
             let NewTech = techList[tech]
             return (
-                <div key={id+i}>
+                <div className="svg-container" key={id+i}>
                     <NewTech width={w} h={h}/>
                 </div>
             )

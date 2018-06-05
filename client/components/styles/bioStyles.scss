@@ -1,21 +1,34 @@
 .bio-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     padding: 14px;
     width: 60%;
     background: rgba(40, 138, 125, 0.205);
-    border: 1px solid rgba(255, 255, 255, 0.671);
-    box-shadow: 6px 11px 23px rgba(255, 255, 255, 0.671);
-    .image-container img {
-        border: 2px solid white;
-        border-radius: 50%;
+    .bio-paragraph {
+        width: 50%;
+        p {
+            text-align: center;
+        }
+    }
+    .image-container{
+        margin: 20px;
+            img {
+            border: 2px solid white;
+            border-radius: 50%;
+        }
     }
 }
 
 @media(max-width: 800px) {
     .bio-container {
         width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        .bio-paragraph {
+            width: 100%;
+        }
     }
 }

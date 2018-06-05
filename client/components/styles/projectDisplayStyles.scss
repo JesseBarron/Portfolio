@@ -1,0 +1,89 @@
+.featured-project {
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    .background-gradient{
+        width: 100%;
+        flex: none;
+        background: rgba(20,20,20, .254);            
+        background: linear-gradient(to top, rgba(200, 152, 231, .23), rgba(0, 0, 0, 0.1));
+    }
+    .project-description {
+        align-self: center;
+        position: absolute;
+        color: white;
+        background: linear-gradient(to left, rgba(0, 0, 0, 0), black);
+        bottom: 5em;
+        font-size: 20px;
+        width: 100%;
+        p {
+            padding: 8px
+        }
+        .project-links {
+            display: flex;
+            justify-content: space-evenly;
+            a {
+                text-decoration: none;
+                color: white;
+            }
+        }
+    }
+    h2 {
+        margin: 10px;
+        font-family: 'Oxygen', sans-serif;
+        background: linear-gradient(to left, rgba(0, 0, 0, .3), rgba(0, 0, 0, 0.9));
+        position: absolute;
+        color: #f1f1f1f1
+    }
+    img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        z-index: -1;
+        // -webkit-transition: -webkit-transform .3s linear;
+        // transition: transform .3s linear;
+    }
+    .icons {
+        width: 100%;
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-self: flex-end;
+        justify-content: flex-end;
+        margin: 18px;
+        z-index: 0;
+        .svg-container {
+            margin: 3px;
+        }
+    }
+    p {
+        align-self: center;
+    }
+    #project-modal-close {
+        position: absolute;
+        right: 0;
+        margin: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        border-image: linear-gradient(to right top, #d47aa9, #c784ba, #b78ec6, #a897ce, #9a9fd1)2 fill;
+        border-radius: 50%;
+    }
+}
+ .featured-project:hover {
+     img{
+        // -webkit-transform: scale(1.2);
+        // transform: scale(1.2);
+    }
+ }
+
+@media(max-width: 800px) {
+    .featured-project {
+        width: 100%;
+    }
+}

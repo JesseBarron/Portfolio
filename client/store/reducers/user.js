@@ -55,7 +55,6 @@ export const fetchMe = () =>
     dispatch => {
       try {
         const user =  jwtDecode(localStorage.getItem('JB_JWT'))
-        console.log(user)
         dispatch(getUser(user))
       } catch(e) {
         console.log(e)

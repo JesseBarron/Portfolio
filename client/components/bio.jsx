@@ -3,7 +3,6 @@ import faker from 'faker'
 import './styles/bioStyles.scss'
 
 const Bio = (props) => {
-    console.log(faker.image.imageUrl())
     return (
         <div className="bio-container">
             <div className="image-container">
