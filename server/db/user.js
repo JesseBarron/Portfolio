@@ -5,7 +5,10 @@ const argon = require('argon2')
 
 const userSchema = mongoose.Schema({
     name: String,
-    password: String,
+    password: {
+        type: String,
+        required: true,
+    },
     email: {
         type: String,
         required: true,
