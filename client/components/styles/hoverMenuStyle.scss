@@ -1,0 +1,19 @@
+.hover-menu {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  background: black;
+  border-radius: 10px;
+  padding: 5px;
+  top: -1000px;
+  left: -1000px;
+  transition: opacity .4s ease-out;
+}
+.hover-bttn {
+  color: #ccc;
+  cursor: pointer;
+}
+.menu > * {
+  display: inline;
+  padding: 4px;
+}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Editor } from '../components'
 
 
 export default class BlogScreen extends Component {
@@ -10,6 +10,9 @@ export default class BlogScreen extends Component {
         return (
             <div>
                 <h1>this is the Blog</h1>
+                <div>
+                    <Editor />
+                </div>
             </div>
         )
     }

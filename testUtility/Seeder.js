@@ -14,6 +14,12 @@
  * 
  * It has to be simple to use too, just call the class with the corresponding
  *  await ClassInstance.Collection.command({ document }, Options?)
+ * 
+ * In order to make things a little easer the user should be able to predefine some
+ * dummy data to call later, this will save new instance to the database
+ * and return the details of the initial data used to create the instance.
+ * 
+ * this way there's less clutter in the testing files!
  */
 
 class TestCollection {

@@ -1,0 +1,58 @@
+.editorbttns-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  transition: 1s;
+}
+.editor-button {
+  border-radius: 50%;
+  border: 1px dashed #00000085;
+  color: #00000085;
+  font-size: 150%;
+  padding: 8px;
+  cursor: pointer;
+  transition: border .9s, color 1s;
+}
+.editor-button:hover {
+  border: 1px solid #000;
+  color: #000;
+}
+.publish-bttn {
+  border: 2px solid green;
+  color: green;
+  margin: 0 auto;
+  border-radius: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+.publish-bttn p {
+  margin: 0 auto;
+  padding: 10px;
+}
+.action-bttns {
+  display: flex;
+}
+.action-bttns > * {
+  margin: 5px;
+}
+// .hide {
+//   pointer-events: none;
+//   opacity: 0;
+// }
+
+.published-enter {
+  opacity: 0.01;
+  transition-delay: 1s;
+}
+.published-enter-active {
+  opacity: 1;
+  transition: all 300ms ease-out;
+}
+.published-exit {
+  opacity: 1;
+}
+.published-exit-active {
+  opacity: 0.1;
+  transition: all 300ms ease-out;
+}

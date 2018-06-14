@@ -4,10 +4,10 @@ const BlogPost = require('./blog')
 let Seeder;
 
 if(process.env.NODE_ENV == 'test') {
-    const TestSeeder = require('../../testUtility/_testSeeder')
+    const TestSeeder = require('../../testUtility/Seeder')
     Seeder = new TestSeeder()
     const collections = [
-        {name:'user', collection: null},
+        {name:'user', collection: User},
         {name: 'project', collection: Project},
         {name: 'blogPost', collection: BlogPost}
     ]

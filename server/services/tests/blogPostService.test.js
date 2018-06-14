@@ -1,11 +1,10 @@
 const { expect } = require('chai')
 const assert = require('assert')
 const { db } = require('../../db/db')
-const { BlogPost, User } = require('../../db')
-
+const { BlogPost } = require('../../db')
+const Seeder = require('mango-seed');
 const app = require('../../index')
 
-//Write a utility that seeds the db temporarily
 
 describe('BlogPostService (blogPost)', () => {
     let service;
