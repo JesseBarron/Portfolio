@@ -1,0 +1,14 @@
+.video-container {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  background: gray;
+}
+
+
+.video-container video {
+  display: block;
+  white-space: normal;
+  width: 100%;
+}
