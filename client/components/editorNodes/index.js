@@ -38,7 +38,7 @@ export const schema = {
     last: { types: ['paragraph'] },
     nodes: [
       { types: ['title'], min: 1, max: 1 },
-      { types: ['paragraph', 'code', 'image'], min: 1 },
+      { types: ['paragraph', 'code', 'image', 'yt', 'video', 'quote'], min: 1 },
     ],
     normalize: (change, violation, { node, child, index }) => {
       switch (violation) {
@@ -60,14 +60,15 @@ export const schema = {
   }
 }
 
-
-
 export { default as CodeNode } from './codeNode.jsx'
 export { default as BoldMark } from './boldMark.jsx'
 export { default as ItalicMark } from './italicMark.jsx'
 export { default as UnderlineMark } from './underlineMark.jsx'
 export { default as StrikeMark } from './strikeMark.jsx'
 export { default as ImageNode } from './imageNode.jsx'
+export { default as YoutubeNode } from './youtubeNode.jsx'
+export { default as VideoNode } from './videoNode.jsx'
+export { default as QuoteMark } from './QuoteMark.jsx'
 
 //Slate Plugins
 export const plugins = [
@@ -75,5 +76,6 @@ export const plugins = [
   markHotkey({ type: 'italic', key: 'i' }),
   markHotkey({ type: 'underline', key: 'u'}),
   markHotkey({ type: 'strike', key: 's' }),
+  nodeHotkey({ type: 'quote', key: "'" }),
   nodeHotkey({ type: 'code', key: '`' }),
 ]

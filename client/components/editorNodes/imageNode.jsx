@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
+import './styles/imageNodeStyle.scss'
 
 const ImageNode = (props) => {
+  const { node, isSelected} = props
+  const src = node.data.get('src')
   return (
-    <div {...props.attributes}>
-      <img {...props.attributes} src={'/assets/Dstag.jpg'} alt="stag" height='200px' width='200px'/>
-    </div>
+    <img {...props.attributes} src={src} className={`blog-image ${ isSelected ? 'selected' : '' }`} />
   )
 }
 export default ImageNode

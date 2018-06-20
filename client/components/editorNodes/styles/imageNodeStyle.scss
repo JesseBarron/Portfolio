@@ -1,0 +1,11 @@
+.blog-image {
+  display: block;
+  height: 50%;
+  margin: auto;
+  object-fit: contain;
+  transition: box-shadow .3s ease-out;
+}
+
+.selected {
+  box-shadow: 1px 1px 13px 1px #F8857E;
+}
