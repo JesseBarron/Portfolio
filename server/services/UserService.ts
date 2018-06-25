@@ -1,12 +1,11 @@
-'use strict';
 const { User } = require('../db')
 
-class UserService {
+export default class UserService {
     constructor() { }
 
     async find(params) {
         try {
-            return await User.find(params.query)
+            return await User.find(params)
         } catch(e) {
             console.log(e)
         }
@@ -37,16 +36,13 @@ class UserService {
         try {
             const regexEmail = new RegExp(`^${email}$`, 'i')
             const user = await User.findOne({email: regexEmail})
-            if(user == null) {
-                throw new Error('Incorrect password or username')
-            } else if(await user.correctPassword(password)) {
+            const isCorrectPW = user ? await user.correctPassword(password) : false
+            if(user != null && isCorrectPW) {
                 return {name: user.name, id: user.id}
             }
-            throw new Error('Incorrect password or username')            
+                throw new Error('Incorrect password or username')          
         } catch (e) {
             throw e
         }
     }
 }
-
-module.exports = UserService

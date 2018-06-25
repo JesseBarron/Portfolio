@@ -1,0 +1,26 @@
+.inputURL {
+  background: white;
+  height: 7em;
+  padding: 1em;
+}
+.URLForm {
+  display: flex;
+  flex-direction: column;
+}
+.URLForm input {
+  font-size: 30px;
+  margin: 30px;
+}
+
+.URL-bttns {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#error-message {
+  margin-left: 25px;
+  color: red;
+}
+.URL-bttns button {
+  padding: 4px;
+}

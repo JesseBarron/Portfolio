@@ -9,12 +9,13 @@
 
   .backgroundDiv {
     background: rgba(0, 0, 0, 0.3);
-    height: 90vh;
+    height: 100vh;
   }
   .navDrawer {
     display: flex;
     flex-direction: column;
     background: rgba(#89f0ed, 0.9);
+    width: 100%;
   }
   .navDrawerHead {
     display: flex;

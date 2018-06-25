@@ -6,12 +6,12 @@
   "author": "Jesse Barron",
   "license": "MIT",
   "scripts": {
-    "seed": "node ./server/scripts/seed.js",
+    "seed": "node ./server_build/scripts/seed.js",
     "build": "webpack",
     "build-watch": "webpack -w --mode development",
-    "start": "node ./server/index.js",
-    "start-dev": "NODE_ENV='development' yarn build-watch & nodemon ./server/index.js",
-    "test": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha ./server/**/*.test.js ./server/**/**/*.test.js",
+    "start": "node ./server_build/index.js",
+    "start-dev": "NODE_ENV='development' yarn build-watch & tsc --pretty -w & nodemon ./server_build/index.js",
+    "test": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' mocha --require ts-node/register --files ./server/**/*.test.ts ./server/**/**/*.test.ts",
     "test-client": "NODE_ENV='test' DB_URL='mongodb://localhost:27017/portfolio-TEST' yarn seed && yarn start & mocha --require babel-polyfill ./client/testSetup.js --compilers babel-core/register ./client/**/*.test.js ./client/**/**/*.test.js"
   },
   "dependencies": {
@@ -26,7 +26,9 @@
     "body-parser": "^1.18.2",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "hard-source-webpack-plugin": "^0.8.1",
     "immutable": "^3.8.2",
+    "is-url": "^1.2.4",
     "jsonwebtoken": "^8.2.1",
     "jwt-decode": "^2.2.0",
     "mongodb": "^3.0.7",
@@ -34,6 +36,7 @@
     "morgan": "^1.9.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
     "react-icons": "^2.2.7",
@@ -51,6 +54,9 @@
     "supertest": "^3.1.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.3",
+    "@types/node": "^10.3.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
     "babel-polyfill": "^6.26.0",
@@ -65,13 +71,15 @@
     "faker": "^4.1.0",
     "fetch-mock": "^6.4.3",
     "jsdom": "^11.10.0",
-    "mango-seed": "^0.1.0",
+    "mango-seed": "^0.1.1",
     "mocha": "^5.1.1",
     "node-sass": "^4.9.0",
     "redux-mock-store": "^1.5.1",
     "sass-loader": "^7.0.1",
     "sinon": "^5.0.7",
     "style-loader": "^0.21.0",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2",
     "webpack": "^4.7.0",
     "webpack-cli": "^2.1.3"
   }

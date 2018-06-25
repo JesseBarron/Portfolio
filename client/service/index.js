@@ -3,7 +3,7 @@ import socketio from '@feathersjs/socketio-client'
 import feathers from '@feathersjs/feathers'
 
 const local = 'http://localhost:8080/';
-const socket = io('http://192.168.86.201:8080')
+const socket = io(local)
 const app = feathers()
 
 app.configure(socketio(socket))

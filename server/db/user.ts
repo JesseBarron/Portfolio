@@ -29,16 +29,14 @@ const userSchema = mongoose.Schema({
     },
     google_id: String,
     comments: [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-    posts: [{ type: Schema.Types.ObjectId, ref: 'Post' }]
+    posts: [{ type: Schema.Types.ObjectId, ref: 'BlogPost' }] // Change this to the actuall name of the schema
 })
 
 userSchema.pre('save', async function() {
     await this.saltPassword()
 })
 
-userSchema.methods.fullName = function() {
-    return `${this.firstName} ${this.lastName}`
-}
+
 
 userSchema.methods.argonHash = async function(userPassword, salt) {
     try {
@@ -60,7 +58,7 @@ userSchema.methods.saltPassword = async function() {
     }
 }
 
-/* Checks if the inputed password matches */
+/* Checks if the input password matches the one in the database */
 userSchema.methods.correctPassword = async function(userPswd) {
     try {
         return await argon.verify(this.password, userPswd)
@@ -69,4 +67,4 @@ userSchema.methods.correctPassword = async function(userPswd) {
     }
 }
 
-module.exports = mongoose.model('User', userSchema)
+export default mongoose.model('User', userSchema)

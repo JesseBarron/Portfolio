@@ -3,7 +3,9 @@ import { connect } from  'react-redux'
 import { 
     Bio, 
     ProjectSec,
-    ProjectModal
+    ProjectModal,
+    ProjectDisplay,
+    Modal
 } from '../components'
 import {
     fetchProjects

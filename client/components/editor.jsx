@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Editor } from 'slate-react'
 import { Value } from 'slate'
+import isURL from 'is-url'
 
 import './styles/editorStyles.scss'
-import { EditorBttns, HoverMenu } from './index'
+import { EditorBttns, HoverMenu, Modal, InputURL } from './index'
 import {
   plugins,
   schema,
@@ -13,18 +15,21 @@ import {
   UnderlineMark,
   StrikeMark,
   ImageNode,
+  VideoNode,
+  YoutubeNode,
+  QuoteMark
 } from './editorNodes'
 
 const existingValue = JSON.parse(localStorage.getItem('blog'))
 const initialValue = Value.fromJSON(
-  existingValue ||{
-  document:{
+  existingValue || {
+  document: {
     nodes: [
       {
         object: 'block',
         type: 'title',
       },
-    ]
+    ],
   }
 })
 
@@ -34,6 +39,9 @@ class EditorComp extends Component {
     this.state = {
       value: initialValue,
       published: false,
+      showModal: false,
+      mediaType: '',
+      error: '',
     }
   }
   componentDidMount() {
@@ -50,15 +58,62 @@ class EditorComp extends Component {
     localStorage.setItem('blog', content)
     this.setState({ value });
   }
-  addImage = (e, type) => {
+  toggleModal = (e, mediaType) => {
+    e.preventDefault()
+
+    this.setState({
+      showModal: !!mediaType,
+      mediaType: mediaType || '',
+      error: ''
+    })
+  }
+  insertMedia = (e, type) => {
+    e.preventDefault()
+    if(!type || !isURL(e.target['media-url'].value)) {
+      this.setState({ error: `Please enter a valid ${type} url` })
+      return
+    }
+
+    const src = e.target['media-url'].value
+    type == 'image' ? this.addImage(src) : this.addVideo(src)
+
+    this.setState({ showModal: false })
+    return
+  }
+  addImage = (src) => {
     const { value } = this.state
     const change = value.change().insertBlock({
       type: 'image',
       isVoid: true,
+      data: {
+        src
+      }
+    })
+    this.handleChange(change)
+  }
+  addVideo = (src) => {
+    const { value } = this.state
+    const isYoutube = /^.*youtube\.com.*$/ig.test(src)
+    src = isYoutube ? src.replace(/^(.*\/)(watch\?v=)(.*)/i, 'https://www.youtube.com/embed/$3') : src
+
+    const change = value.change().insertBlock({
+      type: isYoutube ? 'yt' : 'video', 
+      isVoid: true,
+      data: {
+        src,
+      },
     })
     this.handleChange(change)
   }
   publish = () => {
+    const { value } = this.state
+    const title = value.toJSON().document.nodes[0].nodes[0].leaves[0].text
+    const body = JSON.stringify(value.toJSON())
+    const newSong = {
+      title,
+      author: this.props.authorId,
+      body,
+    }
     this.setState({ published: true })
   }
   updateMenu = () => {
@@ -79,8 +134,17 @@ class EditorComp extends Component {
     menu.style.left = `${rect.left + window.pageXOffset - menu.offsetWidth / 2 + rect.width / 2}px`
   }
   render() {
+    const { mediaType, showModal, value, published, error } = this.state
     return (
       <div className={`editor ${this.state.published ? 'publish' : ''}`}>
+        <Modal show={showModal} options={{ buttons: false, backgrndClose: false }}>
+          <InputURL 
+            insert={this.insertMedia}
+            closeModal={this.toggleModal}
+            type={mediaType}
+            error={error}
+          />
+        </Modal>
         <HoverMenu 
           menuRef={this.menuRef}
           onChange={this.handleChange}
@@ -98,7 +162,8 @@ class EditorComp extends Component {
         />
         <EditorBttns 
           publish={this.publish}
-          hide={this.state.published}
+          hide={published}
+          openModal={this.toggleModal}
         />
       </div>
     )
@@ -130,11 +195,17 @@ class EditorComp extends Component {
           </div>
         )
       case 'title':
-        return <h2 {...props.attributes} className={`title ${this.state.published ? 'published':''}`}>{props.children}</h2>
+        return <h2 {...props.attributes} className={`title`}>{props.children}</h2>
       case 'code':
         return <CodeNode {...props} />
+      case 'quote':
+        return <QuoteMark {...props} />
       case 'image':
         return <ImageNode {...props} />
+      case 'yt':
+        return <YoutubeNode {...props} />
+      case 'video':
+        return <VideoNode {...props} />
     }
   }
   renderMark = (props) => {
@@ -151,4 +222,14 @@ class EditorComp extends Component {
   }
 }
 
-export default EditorComp
+const mapState = ({ User }) => ({
+  authorId: User.id
+})
+
+const mapDispatch = (dispatch) => ({
+  postBlog(blog) {
+    //postBlog
+  }
+})
+
+export default connect(mapState, mapDispatch)(EditorComp)
