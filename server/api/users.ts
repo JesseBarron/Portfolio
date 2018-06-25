@@ -1,7 +1,10 @@
-const router = require('@feathersjs/express').Router()
+import * as express from '@feathersjs/express'
+let router = express.Router()
 const passport = require('passport')
-const app = require('../index')
-module.exports = router
+import app from '../index'
+
+export default router
+
 
 //If authenticated, returns all the user details, otherwise just the name and id
 router.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
@@ -32,7 +35,7 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.delete('/', passport.authenticate('jwt',{session: false}), async (req, res, next) => {
+router.delete('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
     try {
         if(req.user.admin) {
             const where = req.body

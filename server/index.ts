@@ -13,11 +13,11 @@ const {
     UserService,
     ProjectService,
     BlogPostService
-} = require('./services')
+} = require('./services/index')
+
 const PORT = process.env.PORT || 8080;
 const app = express(feathers())
-module.exports = app
-
+export default app
 
 const jwtOpts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
@@ -45,15 +45,18 @@ app.configure(express.rest())
     .configure(socketio())
 
 
-app.use('/api', require('./api'))
-app.use('/auth', require('./auth'))
+/**
+ * The reason I have to do this sloppy default thing is so that I export the 'app' Before I import the file
+ * this makes sure that I have the passport initialized and all the services registered before the file initializes
+ */
+app.use('/api', require('./api').default) 
+app.use('/auth', require('./auth').default)
 
 // Serve static files
 app.use(express.static(path.join(__dirname, '..', 'public')))
     .use((req, res, next) => {
         if (path.extname(req.path).length) {
         const err = new Error('Not found')
-        err.status = 404
         next(err)
         } else {
         next()
@@ -79,6 +82,7 @@ app.use((err, req, res, next) => {
 app.use('user', new UserService)
 app.use('project', new ProjectService)
 app.use('blogPost', new BlogPostService)
+
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`)

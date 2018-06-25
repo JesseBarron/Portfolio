@@ -3,7 +3,7 @@ const { db } = require('../../db/db')
 const { Project } = require('../../db')
 const { expect, should } = require('chai')
 
-const app = require('../../index')
+const app = require('../../index').default
 
 xdescribe('ProjectService', () => {
     const project = {
@@ -89,7 +89,7 @@ xdescribe('ProjectService', () => {
         describe('ProjectService.update', () => {
             it('Should update a document\'s parameter', async () => {
                 const createdProject = await service.create(project)
-                const updateProj = await service.update( createdProject.id, {featured: false})
+                const updateProj = await service.update( createdProject.id, {featured: false }, { new: true })
 
                 expect(updateProj.id).to.equal(createdProject.id)
                 expect(updateProj.featured).to.be.false

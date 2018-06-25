@@ -1,6 +1,6 @@
-const app = require('../../index')
+const app = require('../../index').default
 const jwt = require('jsonwebtoken')
-const { db } = require('../../db/db')
+const { db } = require('../../db/db.ts')
 const { expect } = require('chai')
 const request = require('supertest')
 const { User } = require('../../db')
@@ -10,6 +10,7 @@ const auth = require('../../auth')
 xdescribe('users API endpoints', () => {
     let superUserToken
     let normalUserToken
+
     const user = {
         name: 'test',
         email: 't@t.com',
@@ -24,8 +25,8 @@ xdescribe('users API endpoints', () => {
     beforeEach(async () => {
         try {
             await db.dropDatabase()
-            u1 = await User.create(user)
-            u2 = await User.create(user2)
+            let u1 = await User.create(user)
+            let u2 = await User.create(user2)
 
             superUserToken = jwt.sign({id: u1.id, name: user.name}, process.env.JWT_SECRET)
             normalUserToken = jwt.sign({id: u2.id, name: user2.name}, process.env.JWT_SECRET)

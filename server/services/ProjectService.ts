@@ -1,6 +1,6 @@
 const { Project } = require('../db')
 
-class ProjectService {
+export default class ProjectService {
     constructor() {}
     
     async find(params) {
@@ -31,7 +31,7 @@ class ProjectService {
 
     async remove(id, params) {
         try {
-            const removedProj = await this.get(id)
+            const removedProj = await this.get(id, {})
             await Project.remove({ id, params }) 
             return removedProj
         } catch (e) {
@@ -41,12 +41,9 @@ class ProjectService {
 
     async update(id, data, params) {
         try {
-            await Project.findByIdAndUpdate(id, data)
-            return await this.get(id)
+           return await Project.findByIdAndUpdate(id, data, params)
         } catch (e) {
             console.log(e)
         }
     }
 }
-
-module.exports = ProjectService

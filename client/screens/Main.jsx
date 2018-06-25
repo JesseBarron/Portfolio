@@ -22,7 +22,6 @@ export default class Main extends Component {
         })
     }
     scrollHandler = () => {
-        console.log('done')
         this.setState({menuAnimation: 'move-bottom-left'})
     }
     toggleDrawer = () => {

@@ -1,11 +1,12 @@
-const router = require('@feathersjs/express').Router()
+import * as express from '@feathersjs/express'
+let router = express.Router()
 const jwt = require('jsonwebtoken')
-module.exports = router
-const app = require('../index')
+import  app  from '../index'
 
+export default router
 //If Authentication is successfull send back some user info and a JWT for future varification
 //Else send back an error message.... Not the most robust but it works
-router.post('/login', async (req, res, next) => {
+router.post('/login', async (req, res) => {
     try {
         const {email, password} = req.body
         const user = await app.service('user').login(email, password)

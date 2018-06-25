@@ -4,31 +4,31 @@ import './styles/editorBttnsStyle.scss'
 import { CSSTransition } from 'react-transition-group'
 
 
-const EditorBttn = (props) => {
+const EditorBttn = ({ openModal, hide, publish }) => {
   return(
     <div>
       <CSSTransition
-        in={!props.hide}
+        in={!hide}
         timeout={300}
         classNames="published"
         unmountOnExit
       >
-      <div className={`editorbttns-container ${props.hide ? 'hide':''}`}>
+      <div className={`editorbttns-container ${hide ? 'hide':''}`}>
           <div className='action-bttns'>
-            <span title='Add an Image'>
+            <span title='Add an Image' onClick={(e) => openModal(e, 'image')}>
               <FaFileImageO className='editor-button' />
             </span>
-            <span title='Add a Video'>
+            <span title='Add a Video' onClick={(e) => openModal(e, 'video')}>
               <FaFileMovieO className='editor-button' />
             </span>
-            <span title='Add a Quote Block'>
+            {/* <span title='Add a Quote Block'>
               <FaQuoteLeft className='editor-button' />
             </span>
             <span title='Add Code block'>
               <FaCode className='editor-button' />
-            </span>
+            </span> */}
           </div>
-            <div className='publish-bttn' onClick={props.publish}>
+            <div className='publish-bttn' onClick={publish}>
               <p>Publish</p>
             </div>
         </div>

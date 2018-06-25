@@ -7,7 +7,7 @@ import './styles/projectSecStyles.scss'
 
 
 const ProjectSec = (props) => {
-    const { close, open } = props
+    const { open } = props
     return (
         <div className="projects-container">
                 {

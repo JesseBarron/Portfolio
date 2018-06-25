@@ -5,3 +5,4 @@ public/bundle.js.map
 yarn-error.log
 .env
 .DS_Store
+server_build/**

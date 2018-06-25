@@ -3,7 +3,7 @@ const { db } = require('../../db/db')
 const { User } = require('../../db')
 const { expect, should } = require('chai')
 
-const app = require('../../index')
+const app = require('../../index').default
 
 xdescribe('UserService', () => {
     let service = app.service('user')
@@ -59,6 +59,7 @@ xdescribe('UserService', () => {
         it('Should take an object with a prop of email or id and return a found user', async () => {
             const find = { email: 't@t.com' }
             const foundUser = await service.find(find)
+
             expect(foundUser).to.be.an('array').with.lengthOf(1)
             expect(foundUser[0].name).to.equal(user.name)
             expect(foundUser[0].email).to.equal(user.email)

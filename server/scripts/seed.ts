@@ -1,6 +1,6 @@
 const faker = require('faker')
-const { User, Project } = require('../db')
-const { db } = require('../db/db')
+import { User, Project } from '../db/index'
+import  { db } from '../db/db'
 
 
 const tech = [
@@ -36,6 +36,8 @@ const generateUsers = async () => {
             name: faker.name.findName(),
             email: faker.internet.email(),
             password: 123,
+            admin: false,
+            god: false
         }
         fakeUsers.push(user)
     }

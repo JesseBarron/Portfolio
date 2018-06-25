@@ -1,4 +1,5 @@
 const path = require('path')
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const isDev = process.env.NODE_ENV === 'development'
 
 module.exports = {
@@ -7,6 +8,9 @@ module.exports = {
         path: path.resolve(__dirname, 'public'),
         filename: 'bundle.js'
     },
+    plugins: [
+        new HardSourceWebpackPlugin()
+    ],
     devtool: 'source-map',
     module: {
         rules: [{

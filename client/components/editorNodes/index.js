@@ -1,8 +1,5 @@
 import { Block, Value } from 'slate'
 import { CHILD_REQUIRED, CHILD_TYPE_INVALID, LAST_CHILD_TYPE_INVALID } from 'slate-schema-violations'
-/**
- * ~-\\- <(image)(")(Video)> -//-~ <---- This is how I will add Images/Video and Quote Blocks
- */
 
 const nodeHotkey = (options) => {
   const { type, key } = options
