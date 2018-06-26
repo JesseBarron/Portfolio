@@ -3,7 +3,7 @@ const { Project } = require('../db')
 export default class ProjectService {
     constructor() {}
     
-    async find(params) {
+    async find(params: object) {
         try {
             return await Project.find(params.query)
         } catch (e) {
@@ -11,25 +11,23 @@ export default class ProjectService {
         }
     }
 
-    async get(id, params) {
+    async get(id: string, params: object) {
         try {
-            return await Project.findById(id)
+            return await Project.findById(id, params)
         } catch (e) {
             console.log(e)
         }
     }
 
-    async create(data, params) {
+    async create(data: object, params: object) {
         try {
-            const newProject = new Project(data)
-            const savedProject = await newProject.save()
-            return savedProject
+            return await Project.create(data, params)
         } catch (e) {
             console.log(e)
         }
     }
 
-    async remove(id, params) {
+    async remove(id: string, params: object) {
         try {
             const removedProj = await this.get(id, {})
             await Project.remove({ id, params }) 
@@ -39,7 +37,7 @@ export default class ProjectService {
         }
     }
 
-    async update(id, data, params) {
+    async update(id: string, data: object, params: object) {
         try {
            return await Project.findByIdAndUpdate(id, data, params)
         } catch (e) {

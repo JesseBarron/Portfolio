@@ -125,13 +125,13 @@ xdescribe('BlogPostService (blogPost)', () => {
         expect(post.id).to.equal(foundPost.id)
         expect(post.name).to.equal(foundPost.name)
       })
-      it('get should throw an error if a project was not found', async () => {
-        try {
-          await service.get(134134134151)
-        } catch (e) {
-          expect(e).to.equal('Post Not Found')
-        }
-      })
+      // it('get should throw an error if a project was not found', async () => {
+      //   try {
+      //     await service.get(134134134151)
+      //   } catch (e) {
+      //     expect(e).to.equal('Post Not Found')
+      //   }
+      // })
     })
     describe('Create, Update, Remove', () => {
       it('Create should persist new posts to the database', async () => {
@@ -159,6 +159,18 @@ xdescribe('BlogPostService (blogPost)', () => {
         expect(blog.doc.likes).to.not.equal(updatedBlog.likes)
         await seed.blogPost.remove('blog')
       })
-      it('Remove should remove a specific document in the database')
+      it('Remove should remove a specific document in the database', async () => {
+        const postData = {
+          title: 'Test Remove Post',
+          author: author1._id,
+          body: JSON.stringify(blogValue.toJSON()),
+          likes: 0
+        }
+        const post = await seed.blogPost.create('post', postData)
+        const deletedPost = await service.remove(post.doc.id)
+        expect(deletedPost.id).to.equal(post.doc.id)
+        const removedDoc = await service.get(post.doc.id)
+        expect(removedDoc).to.equal(null)
+      })
     })
 })

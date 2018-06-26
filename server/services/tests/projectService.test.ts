@@ -50,9 +50,9 @@ xdescribe('ProjectService', () => {
         it('Should be able to persist a new project to the database', async () => {
             const createdProject = await service.create(project)
 
-            expect(createdProject.title).to.equal(project.title)
-            expect(createdProject.description).to.equal(project.description)            
-            expect(createdProject.technologies[0]).to.equal(project.technologies[0])            
+            expect(createdProject[0].title).to.equal(project.title)
+            expect(createdProject[0].description).to.equal(project.description)            
+            expect(createdProject[0].technologies[0]).to.equal(project.technologies[0])            
         })
     })
     describe('ProjectService.find', () => {
@@ -65,33 +65,33 @@ xdescribe('ProjectService', () => {
         })
         it('Should return appropriate projects based on parameters passed', async () => {
             const createdProject = await service.create(project)
-            const foundProject = await service.find({ title: createdProject.title })
+            const foundProject = await service.find({ title: createdProject[0].title })
 
-            expect(foundProject[0].id).to.equal(createdProject.id)
+            expect(foundProject[0].id).to.equal(createdProject[0].id)
         })
         describe('ProjectService.get', () => {
             it('Should take an id as a parameter and return a project with the same id', async () => {
                 const createdProject = await service.create(project)
-                const foundProject = await service.get(createdProject.id)
+                const foundProject = await service.get(createdProject[0].id)
 
-                expect(foundProject.id).is.equal(createdProject.id)
+                expect(foundProject.id).is.equal(createdProject[0].id)
             })
         })
         describe('ProjectService.remove', () => {
             it('Should remove a Project with the given id from the database', async () => {
                 const createdProject = await service.create(project)
-                const removedProj = await service.remove(createdProject.id)
+                const removedProj = await service.remove(createdProject[0].id)
                 
-                expect(removedProj.title).to.equal(createdProject.title)
-                expect(removedProj.id).to.equal(createdProject.id)
+                expect(removedProj.title).to.equal(createdProject[0].title)
+                expect(removedProj.id).to.equal(createdProject[0].id)
             })
         })
         describe('ProjectService.update', () => {
             it('Should update a document\'s parameter', async () => {
                 const createdProject = await service.create(project)
-                const updateProj = await service.update( createdProject.id, {featured: false }, { new: true })
+                const updateProj = await service.update( createdProject[0].id, {featured: false }, { new: true })
 
-                expect(updateProj.id).to.equal(createdProject.id)
+                expect(updateProj.id).to.equal(createdProject[0].id)
                 expect(updateProj.featured).to.be.false
             })
         })

@@ -3,12 +3,13 @@
     "outDir": "./server_build",
     "allowJs": true,
     "target": "es5",
-    "lib": ["es2015", "es2018"]
+    "lib": ["es2015", "es2018"],
   },
   "include": [
     "./server"
   ],
   "exclude": [
     "node_modules",
+    "./server/**/tests"
   ]
 }

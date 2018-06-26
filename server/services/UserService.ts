@@ -3,7 +3,7 @@ const { User } = require('../db')
 export default class UserService {
     constructor() { }
 
-    async find(params) {
+    async find(params: object) {
         try {
             return await User.find(params)
         } catch(e) {
@@ -11,11 +11,11 @@ export default class UserService {
         }
     }
 
-    async get(id, params) {
-        return await User.findById(id)
+    async get(id: string, params: object) {
+        return await User.findById(id, params)
     }
 
-    async create(data, params) {
+    async create(data, params: object) {
         try {
             if(data.name && data.password && data.email && !data.admin) {
                 const newUser = new User(data)
@@ -28,11 +28,11 @@ export default class UserService {
         }
     }
 
-    async remove(id, params) {
+    async remove(id: string, params: object) {
         return await User.remove({ id, params })
     }
 
-    async login(email, password) {
+    async login(email: string, password: string) {
         try {
             const regexEmail = new RegExp(`^${email}$`, 'i')
             const user = await User.findOne({email: regexEmail})
