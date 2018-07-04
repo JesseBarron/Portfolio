@@ -1,18 +1,19 @@
-import * as express from '@feathersjs/express'
-let router = express.Router()
+let router = require('express').Router()
+const { User } = require('../db')
 const passport = require('passport')
-import app from '../index'
+const app = require('../index')
 
 export default router
 
 
 //If authenticated, returns all the user details, otherwise just the name and id
 router.get('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
+    // console.log(req.query)
     try {
         if(req.user.admin) {
-            res.send(await app.service('user').find(req.body))
+            res.send(await User.find(req.body))
         } else if(req.user.id && (req.body.id || req.body.email)) {
-            const fetchedUser = await app.service('user').find(req.body)
+            const fetchedUser = await User.find(req.body)
             const { id, name } = fetchedUser[0]
             res.send({ id, name })
         } else {
@@ -24,10 +25,11 @@ router.get('/', passport.authenticate('jwt', {session: false}), async (req, res,
     }
 })
 
+// Creates User
 router.post('/', async (req, res, next) => {
     try {
         const newUser = req.body
-        const createdUser = await app.service('user').create(newUser)
+        const createdUser = await User.create(newUser)
         res.send({name: createdUser.name, id: createdUser.id})
     } catch(e) {
         console.log(e)
@@ -35,13 +37,16 @@ router.post('/', async (req, res, next) => {
     }
 })
 
+// Deletes User
 router.delete('/', passport.authenticate('jwt', {session: false}), async (req, res, next) => {
     try {
         if(req.user.admin) {
-            const where = req.body
-            res.send(await app.service('user').remove(null, where))
+            const params = req.body
+            const removedUser = await User.findOneAndRemove(params)
+            res.send(removedUser)
         } else {
-            res.send(await app.service('user').remove(req.user.id))
+            const removedUser = await User.findOneAndRemove({_id: req.user.id})
+            res.send(removedUser)
         }
     } catch(e) {
         console.log(e)

@@ -1,7 +1,32 @@
 const faker = require('faker')
-import { User, Project } from '../db/index'
+import { User, Project, BlogPost, seeder } from '../db/index'
 import  { db } from '../db/db'
+import { Value } from 'slate'
 
+const postVal = Value.fromJSON({
+  document: {
+    nodes: [
+      {
+        object: 'block',
+        type: 'title',
+      },
+      {
+        object: 'block',
+        type: 'paragraph',
+        nodes: [
+          {
+            object: 'text',
+            leaves: [
+              {
+                text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam viverra enim lorem, non bibendum nulla egestas eu. Donec auctor, nunc nec dapibus ultricies, magna ex sodales diam, a mattis massa ante suscipit nunc. Curabitur rhoncus felis elementum, facilisis ante nec, interdum sem.'
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  }
+})
 
 const tech = [
   'ReactNative',
@@ -21,6 +46,35 @@ const getRandomTech = (n) => {
     techArr.push(tech[ranNum])
   }
   return techArr
+}
+
+const generateBlogPosts = async () => {
+  await seeder.blogPost.removeAll()
+  let author = await seeder.user.create('author', {name: 'mayra', email: 'm@m.com', password: '123', admin: true})
+  author = author.doc
+
+  const fakeBlogPosts = [{
+    title: 'Fake Blog',
+    author: author._id,
+    body: JSON.stringify(postVal.toJSON()),
+  }]
+
+  for(let i = 0; i < 10; i++) {
+    let post = {
+      title: faker.name.findName(),
+      author: author._id,
+      body: JSON.stringify(postVal.toJSON()),
+      thumbnail: faker.image.imageUrl(),
+      preview: 'simple Privew'
+    }
+    fakeBlogPosts.push(post)
+  }
+  try {
+    await BlogPost.create(fakeBlogPosts)
+    return true
+  } catch (e) {
+    console.log(e)
+  }
 }
 
 const generateUsers = async () => {
@@ -77,6 +131,7 @@ const seed = async () => {
     await db.dropDatabase()
     await generateUsers()
     await generateProjects()
+    await generateBlogPosts()
     return "DONE"
   } catch (e) {
     console.log(e);

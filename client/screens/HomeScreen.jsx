@@ -67,7 +67,7 @@ const mapState = store =>({
 
 const mapDispatch = dispatch => ({
     getFeaturedProjects() {
-        dispatch(fetchProjects({query: {featured: true}}))
+        dispatch(fetchProjects({featured: true}))
     }
 })
 export default connect(mapState, mapDispatch)(HomeScreen)

@@ -1,4 +1,4 @@
-import { projectService } from '../../service'
+import axios from 'axios'
 
 const initialState = {
     project: {},
@@ -41,7 +41,8 @@ export default (state= initialState, action) => {
 export const createProject = (data) => 
     async dispatch => {
         try {
-            const newProject = await projectService.create(data)
+            let newProject = await axios.post('/', data)
+            newProject = newProject.data
             const action = getSelectedProject(newProject)
             dispatch(action)
             return newProject
@@ -53,7 +54,8 @@ export const createProject = (data) =>
 export const fetchProject = (id) =>
     async dispatch => {
         try {
-            const project = await projectService.get(id)
+            let project = await axios.get(`api/prjects/${id}`)
+            project = project.data
             const action = getSelectedProject(project)
             dispatch(action)
             return project
@@ -65,7 +67,8 @@ export const fetchProject = (id) =>
 export const fetchProjects = (params) =>
    async dispatch => {
         try {
-            const projects = await projectService.find(params)
+            let projects = await axios.get('api/projects', {params})
+            projects = projects.data
             const action = getProjects(projects)
             dispatch(action)
             return projects
@@ -77,7 +80,8 @@ export const fetchProjects = (params) =>
 export const updateProject = (id, data) =>
     async dispatch => {
         try {
-            const updatedProject = await projectService.update(id, data)
+            let updatedProject = await axios.put(`api/projects/${id}`, data)
+            updatedProject = updatedProject.data
             const action = getSelectedProject(updatedProject)
             dispatch(action)
             await dispatch(fetchProjects())
@@ -90,7 +94,8 @@ export const updateProject = (id, data) =>
 export const removeProject = (id) => 
     async dispatch => {
         try {
-            const removeProject = await projectService.remove(id)
+            let removedProject = await axios.delete(`api/projects/${id}`)
+            removedProject = removedProject.data
             return removedProject 
         } catch (e) {
             console.log(e)

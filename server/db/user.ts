@@ -67,4 +67,22 @@ userSchema.methods.correctPassword = async function(userPswd) {
     }
 }
 
+//  userSchema.methods.login = async function(email, password) {
+//      console.log(this.find)
+//     // try {
+//     //     const regexEmail = new RegExp(`^${email}$`, 'i')
+//     //     const user = await this.model.find({email: regexEmail})
+//     //     console.log(user)
+//     //     const isCorrectPW = user ? await user.correctPassword(password) : false
+//     //     if(user != null && isCorrectPW) {
+//     //         return {name: user.name, id: user.id}
+//     //     }
+//     //         throw new Error('Incorrect password or username')          
+//     // } catch (e) {
+//     //     console.log(e)
+//     //     throw e
+//     // }
+// }
+
+
 export default mongoose.model('User', userSchema)
