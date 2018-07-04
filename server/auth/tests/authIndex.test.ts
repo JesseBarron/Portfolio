@@ -1,7 +1,7 @@
-const request = require('supertest')
-const { db } = require('../../db/db.ts')
-const app = require('../../index').default
-const { expect } = require('chai')
+// const request = require('supertest')
+// const { db } = require('../../db/db.ts')
+// const app = require('../../index').default
+// const { expect } = require('chai')
 
 xdescribe('Authenticaiton Routes', () => {
     let userId

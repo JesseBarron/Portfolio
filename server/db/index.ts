@@ -3,12 +3,12 @@ import Project from './projects'
 import BlogPost from './blog'
 
 const Seeder = require('mango-seed')
-export let seed;
 
-if(process.env.NODE_ENV == 'test') {
+
+// if(process.env.NODE_ENV != 'production') {
     const faker = require('faker')
-    seed = new Seeder()
-
+    export const seeder = new Seeder()
+    
     const userTemplate = {
         name: faker.name.firstName,
         email: faker.internet.email,
@@ -30,11 +30,11 @@ if(process.env.NODE_ENV == 'test') {
         {name: 'project', model: Project},
         {name: 'blogPost', model: BlogPost}
     ]
-    seed.addManyModels(models)
-    seed.user.setTemplate(userTemplate)
-    seed.project.setTemplate(projectTemplate)
-    seed.blogPost.setTemplate(blogTemplate)
-}
+    seeder.addManyModels(models)
+    seeder.user.setTemplate(userTemplate)
+    seeder.project.setTemplate(projectTemplate)
+    seeder.blogPost.setTemplate(blogTemplate)
+// }
 
 export { default as User } from './user'
 export { default as Project } from './projects'

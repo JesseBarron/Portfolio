@@ -1,22 +1,24 @@
 require('dotenv').config()
-const { db } = require('./db')
-const feathers = require('@feathersjs/feathers')
-const express = require('@feathersjs/express')
-const socketio = require('@feathersjs/socketio')
+const { User } = require('./db')
+// const feathers = require('@feathersjs/feathers')
+// const express = require('@feathersjs/express')
+// const socketio = require('@feathersjs/socketio')
+const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const passport = require('passport')
 const JwtStrategy = require('passport-jwt').Strategy,
       ExtractJwt = require('passport-jwt').ExtractJwt
-const { 
-    UserService,
-    ProjectService,
-    BlogPostService
-} = require('./services/index')
+// const { 
+//     UserService,
+//     ProjectService,
+//     BlogPostService
+// } = require('./services/index')
 
 const PORT = process.env.PORT || 8080;
-const app = express(feathers())
+const app = express()
+
 export default app
 
 const jwtOpts = {
@@ -26,7 +28,7 @@ const jwtOpts = {
 
 passport.use(new JwtStrategy(jwtOpts, async (payload, done) => {
     try {
-        const user = await app.service('user').get(payload.id)
+        const user = await User.findById(payload.id)
             if(user != null) {
                 return done(null, user)
             } else {
@@ -41,8 +43,6 @@ app.use(passport.initialize())
 app.use(morgan('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.configure(express.rest())
-    .configure(socketio())
 
 
 /**
@@ -79,9 +79,9 @@ app.use((err, req, res, next) => {
 })
 
 /* Services Registry */
-app.use('user', new UserService)
-app.use('project', new ProjectService)
-app.use('blogPost', new BlogPostService)
+// app.use('user', new UserService)
+// app.use('project', new ProjectService)
+// app.use('blogPost', new BlogPostService)
 
 
 app.listen(PORT, () => {

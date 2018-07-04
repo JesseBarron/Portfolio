@@ -1,7 +1,8 @@
-import * as express from '@feathersjs/express'
-let router = express.Router()
+const router = require('express').Router()
 const jwt = require('jsonwebtoken')
-import  app  from '../index'
+
+const { User } = require('../db')
+const app = require('../index')
 
 export default router
 //If Authentication is successfull send back some user info and a JWT for future varification
@@ -9,12 +10,19 @@ export default router
 router.post('/login', async (req, res) => {
     try {
         const {email, password} = req.body
-        const user = await app.service('user').login(email, password)
-        res.send({
-            token: jwt.sign(user, process.env.JWT_SECRET),
-            user,
-            success: true
-        })
+        const regexEmail = new RegExp(`^${email}$`, 'i')
+        const user = await User.findOne({email: regexEmail})
+        const isCorrectPW = await user.correctPassword(password)
+        if(user != null && isCorrectPW) {
+            res.send({
+                token: jwt.sign({name: user.name, id: user.id}, process.env.JWT_SECRET),
+                user,
+                success: true
+            })
+
+        } else {
+            throw new Error("NOPE")
+        }
     } catch(e) {
         res.send({
             code: 500,
@@ -27,7 +35,7 @@ router.post('/login', async (req, res) => {
 //Creates a new user account
 router.post('/signup', async (req, res, next) => {
     try {
-        const user = await app.service('user').create(req.body)
+        const user = await User.create(req.body)
         const {id, name} = user
         res.send({
             user: {

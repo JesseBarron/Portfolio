@@ -1,8 +1,7 @@
-import * as express from '@feathersjs/express'
-import usersAPI from './users'
+const router = require('express').Router()
 
-let router = express.Router()
-
-router.use('/users',  usersAPI)
+router.use('/users',  require('./users').default)
+router.use('/projects', require('./projects').default)
+router.use('/blogPosts', require('./blogPosts').default)
 
 export default router

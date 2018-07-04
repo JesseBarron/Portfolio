@@ -1,6 +1,6 @@
 const app = require('../../index').default
 const jwt = require('jsonwebtoken')
-const { db } = require('../../db/db.ts')
+const { db } = require('../../db/db')
 const { expect } = require('chai')
 const request = require('supertest')
 const { User } = require('../../db')
@@ -105,16 +105,16 @@ xdescribe('users API endpoints', () => {
                 .set('Authorization', `Bearer ${superUserToken}`)                
                 .expect(200)
 
-                expect(result.body.ok).to.equal(1)
+                expect(result.body.email).to.equal(user2.email)
         })
-        it('if requested from user, that user should be deleted', async () => {
+        it('if requested from regular user, that user should be deleted', async () => {
             const result = await request(app)
                 .delete('/api/users')
                 .send({email: user2.email})
                 .set('Authorization', `Bearer ${normalUserToken}`)                
                 .expect(200)
 
-                expect(result.body.ok).to.equal(1)
+                expect(result.body.email).to.equal(user2.email)
         })
     })
     describe('UPDATE /api/users', () => {
