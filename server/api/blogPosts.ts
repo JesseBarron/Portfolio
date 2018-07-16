@@ -12,7 +12,7 @@ router.get('/', async (req, res, next) => {
     // console.log(req.params)
     // console.log(req.query)
     // console.log(req.body)
-    const blogPosts = await BlogPost.find(req.body)
+    const blogPosts = await BlogPost.find(req.body).populate('author', 'name')
     res.send(blogPosts)
   } catch (e) {
     next(e)
@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:_id', async (req, res, next) => {
   try {
     const { _id } = req.params
-    const blogPost = await BlogPost.findById(_id)
+    const blogPost = await BlogPost.findById(_id).populate('author', 'name')
     res.send(blogPost)
   } catch (e) {
     next(e)

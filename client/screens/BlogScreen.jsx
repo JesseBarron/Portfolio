@@ -6,7 +6,9 @@ import {
 import {
 	fetchAllBlogs
 } from '../store'
-
+import './styles/_BlogScreen.scss'
+import sketch from '../P5/blogBackground'
+import P5Wrapper from 'react-p5-wrapper'
 
 class BlogScreen extends Component {
 	constructor(props) {
@@ -23,10 +25,13 @@ class BlogScreen extends Component {
 				<section>
 					<h2>There should be a carousel here</h2>
 				</section>
-				<section>
+				<section style={{position: 'relative', overflow: 'hidden'}} >
 					<div>This is gonna be the sort and search section for the uhh list</div>
 					<h2>This is going to be the blog list section</h2>
-					<div style={{margin: '0 auto', width: '75%'}} >
+					<div style={{position: 'absolute', zIndex: -1}}>
+						{/* <P5Wrapper sketch={sketch} /> */}
+					</div>
+					<div className="blog-list">
 						{
 							blogs.map((post, i) => <BlogListItem key={i} post={ post } />)
 						}

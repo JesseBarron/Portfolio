@@ -1,11 +1,18 @@
 import React,{ Component } from 'react'
-
+import './styles/bioListItemStyles.scss'
 
 const BlogListItem = ({ post }) => {
+  let { name } = post.author
+  name = name[0].toUpperCase() + name.substr(1)
   return(
-    <div key={post._id} style={{ background: 'grey', display: 'flex', flexDirection: 'row', marginBottom: '8px', padding: '5px' }}>
-      <img src={post.thumbnail || 'assets/Dstag.jpg'} style={{height:'100px'}}/>
-      <h3> {post.title} </h3>
+    <div key={post._id} className='blog-list-item-container'>
+      <img src={'assets/Dstag.jpg'} style={{height:'100px', objectFit: 'contain'}}/>
+      {/* <img src={post.thumbnail || 'assets/Dstag.jpg'} style={{height:'100px'}}/> */}
+      <div className='blog-list-description'>
+        <h2>{post.title}</h2>
+        <p>{post.preview}</p>
+        <label style={{color: 'yellowgreen'}}>Written By: {name}</label>
+      </div>
     </div>
   )
 }

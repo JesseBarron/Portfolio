@@ -1,0 +1,15 @@
+.blog-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 8px;
+  position: relative;
+  margin: 0 auto;
+  width: 75%;
+}
+
+@media(max-width: 700px) {
+  .blog-list {
+    width: 100%;
+    grid-template-columns: 1fr;
+  }
+}
